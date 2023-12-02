@@ -9,24 +9,24 @@ body {
   .square {
     width: 250px;
     height: 250px;
-    background-color: green;
+    background-color: red;
     animation: animatedSquare 2s infinite;
     position: relative;
   }
   
   @keyframes animatedSquare {
       0% {
-        background: blue;
+        background: red;
         top: 0px;
       }
     
       50% {
-        background: red;
+        background: blue;
         top: 200px;
       }
     
       100% {
-        background: blue;
+        background: red;
         top: -200px;
       }
     }
