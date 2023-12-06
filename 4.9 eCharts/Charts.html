@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCharts</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+</head>
+<body>
+<!-- Prepare a DOM with a defined width and height for ECharts -->
+    <div id="main" style="width: 900px; height: 600px"></div>
+    <script type="text/javascript">
+
+      //Initialize the echarts instance based on the prepared dom
+      let myChart = echarts.init(document.getElementById("main"));
+
+      // Specify the configuration items and data for the chart
+      const catagories = [
+        "Jordans",
+        "Adidas",
+        "Nike",
+        "Puma",
+      ];
+      let catCounts = {};
+      let options = {
+        title: { text: "Shoe Sale Categories" },
+        xAxis: {
+          data: catagories,
+        },
+        yAxis: {},
+        series: [
+          {
+            name: "# products",
+            type: "bar",
+            data: [15, 6, 10, 2],
+          },
+        ],
+      };
+      fetch("https://fakestoreapi.com/products")
+        .then((response) => response.json())
+        .then((json) => {
+          // use this JSON to find and set correct option data for the chart
+          json.forEach((element) => {
+            const cat = element.category;
+            if (cat in catCounts) catCounts[cat]++;
+            else catCounts[cat] = 1;
+          });
+          // console.log(catCounts)
+        })
+        .then(() => {
+          // Display the chart
+          myChart.setOption(options);
+        });
+
+    </script>>
+</body>
+</html>
